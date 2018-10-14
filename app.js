@@ -6,26 +6,28 @@ var http = require('http');
 var https = require('https');
 
 
-app.get('/',function(req,res){
+app.get('/', function (req, res) {
     res.send('<h1>David is a hoe</h1>')
 });
 
 //creates the server+redirect from http to https.
 console.log('Node running in env: ' + process.env.ENV)
-if (process.env.ENV){
-    if (process.env.ENV == 'production'){
+if (process.env.ENV) {
+    if (process.env.ENV == 'production') {
         var sslOptions = {
-            key: fs.readFileSync('/root/ssl/BrianScience.key'),   
-            cert: fs.readFileSync('/root/ssl/Brian_Science.crt'),   
-            ca: fs.readFileSync ('/root/ssl/Brian_Science.ca-bundle')   
-        };        
+            key: fs.readFileSync('/root/ssl/BrianScience.key'),
+            cert: fs.readFileSync('/root/ssl/Brian_Science.crt'),
+            ca: fs.readFileSync('/root/ssl/Brian_Science.ca-bundle')
+        };
         https.createServer(sslOptions, app).listen(443)
         http.createServer(function (req, res) {
-            res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+            res.writeHead(301, {
+                "Location": "https://" + req.headers['host'] + req.url
+            });
             res.end();
         }).listen(80);
         console.log('Node started on port 80 and 443')
-    }  else {
+    } else {
         http.createServer(app).listen(80);
         console.log('Node started on port 80')
     }
@@ -33,6 +35,3 @@ if (process.env.ENV){
     http.createServer(app).listen(80);
     console.log('Node started on port 80')
 }
-
-
-
