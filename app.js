@@ -11,6 +11,7 @@ app.get('/',function(req,res){
 });
 
 //creates the server+redirect from http to https.
+console.log('Node running in env: ' + process.env.ENV)
 if (process.env.ENV){
     if (process.env.ENV == 'production'){
         var sslOptions = {
