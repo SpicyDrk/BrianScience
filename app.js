@@ -11,13 +11,14 @@ app.get('/',function(req,res){
 });
 
 //creates the server+redirect from http to https.
-
+console.log(process.env.ENV)
 if (process.env.ENV == 'production'){
     var sslOptions = {
         key: fs.readFileSync('/root/ssl/BrianScience.key'),   
         cert: fs.readFileSync('/root/ssl/Brian_Science.crt'),   
         ca: fs.readFileSync ('/root/ssl/Brian_Science.ca-bundle')   
     };    
+    
     https.createServer(sslOptions, app).listen(443)
     http.createServer(function (req, res) {
         res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
