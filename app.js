@@ -12,7 +12,7 @@ var httpsServer;
 app.use(express.static('public'));
 
 //creates the server+redirect from http to https.
-console.log('Node running in env: ' + process.env.ENV + ' And port ' +process.env.PORT)
+console.log('Node running in env: ' + process.env.ENV + ' and port:" ' +process.env.PORT)
 if (process.env.ENV == 'production') {
     var sslOptions = {
         key: fs.readFileSync('/root/ssl/BrianScience.key'),
@@ -32,7 +32,7 @@ if (process.env.ENV == 'production') {
     console.log('Node started on port 80')
 }
 
-var io = socket(httpServer);
+var io = socket(httpsServer);
 io.on('connection', function(e){
     console.log(e.id);
 })
