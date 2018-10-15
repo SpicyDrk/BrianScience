@@ -1,13 +1,20 @@
 var express = require('express');
 require('dotenv').config();
 var app = express();
+var socketApp = express();
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
+var socket = require('socket.io')(http);
+var socketServer = socket.listen(3000);
+var io = socket.listen(socketServer);
 
+io.sockets.on('connection', function(sock){
+    console.log(sock)
+})
 
 app.get('/', function (req, res) {
-    res.send('<h1>David is a hoe</h1>')
+    res.sendFile('views/home.html', {root: __dirname })
 });
 
 //creates the server+redirect from http to https.
@@ -35,3 +42,4 @@ if (process.env.ENV) {
     http.createServer(app).listen(80);
     console.log('Node started on port 80')
 }
+
