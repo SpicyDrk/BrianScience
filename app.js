@@ -5,7 +5,13 @@ var socketApp = express();
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-var socket = require('socket.io')(http);
+var socket;
+if (process.env.ENV == 'production'){
+    socket = require('socket.io')(http);
+} else {
+    socket = require('socket.io')(https);
+}
+
 var socketServer = socket.listen(3000);
 var io = socket.listen(socketServer);
 
