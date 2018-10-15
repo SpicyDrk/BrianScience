@@ -12,7 +12,7 @@ var httpsServer;
 app.use(express.static('public'));
 
 //creates the server+redirect from http to https.
-console.log('Node running in env: ' + process.env.ENV + ' and port:" ' +process.env.PORT)
+console.log('Node running in env: ' + process.env.ENV + ' and port: ' +process.env.PORT)
 if (process.env.ENV == 'production') {
     var sslOptions = {
         key: fs.readFileSync('/root/ssl/BrianScience.key'),
