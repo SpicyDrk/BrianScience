@@ -7,9 +7,9 @@ var http = require('http');
 var https = require('https');
 var socket;
 if (process.env.ENV == 'production'){
-    socket = require('socket.io')(http);
+    socket = require('socket.io')(http,{ origins: '*:*'});
 } else {
-    socket = require('socket.io')(https);
+    socket = require('socket.io')(https,{ origins: '*:*'});
 }
 
 var socketServer = socket.listen(3000);
