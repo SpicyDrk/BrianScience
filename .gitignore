@@ -1,2 +1,6 @@
 ssl/
 .env
+*.ca-bundle
+*.crt
+*.key
+*.csr
